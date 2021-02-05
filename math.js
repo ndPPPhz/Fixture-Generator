@@ -1,6 +1,6 @@
-let findPermutations = (array) => {
+function findPermutations(array) {
     if (!array || typeof array !== "object"){
-      return "Please enter an array"
+      throw 'Argument 1 must be an array'
     } else if (array.length < 2 ){
       return array
     }
@@ -20,11 +20,11 @@ let findPermutations = (array) => {
 }
 
 function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
+  return Math.floor(Math.random() * Math.floor(max))
 }
 
 function factorial(n) {
-  if (n == 1) {
+  if (n === 1) {
       return n
   }
   return n * factorial(n-1)

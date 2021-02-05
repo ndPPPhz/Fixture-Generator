@@ -19,12 +19,12 @@ function generate2NMatrix(array) {
         return [array]
     }
     // A matrix aka array of array. 
-    let matrix = new Array()
+    let matrix = []
     // Determine how many rows are needed to store the array as a 2xN Matrix
     const rows = Math.round(array.length / 2)
     // Generate the empty array for each row
     for (let index = 0; index < rows; index++) {
-        matrix[index] = new Array()
+        matrix[index] = []
     }
 
     // Fill the matrix with the value from array
@@ -34,9 +34,7 @@ function generate2NMatrix(array) {
         // Column is retrieved by taking the modulo of index % 2. 3 % 2 = 1 => 1. Column Index 1
         let row = Math.floor(index / 2)
         let column = index % 2
-
-        let array = matrix[row]
-        array[column] = value
+        matrix[row][column] = value
     })
     return matrix
 }
@@ -57,7 +55,7 @@ function rotateAroundPivot(matrix) {
     const neededRotationCount = rows * 2 - 1
     // In order to swap each element with the next one
     // we need one tmp variable
-    let tmp = undefined
+    let tmp
 
     // Starting index
     let currentIndex = {
@@ -66,10 +64,11 @@ function rotateAroundPivot(matrix) {
     }
 
     for (let i = 0; i < neededRotationCount; i++) {
+        // Retrieve the first next index
+        const nIndex = nextIndex(currentIndex.row, currentIndex.column, height)
+
         // First rotation
-        if (tmp == undefined) {
-            // Retrieve the first next index
-            const nIndex = nextIndex(currentIndex.row, currentIndex.column, height)
+        if (typeof tmp === 'undefined') {
             // Save the value stored in the next index
             tmp = matrix[nIndex.row][nIndex.column]
             // Set the value in the current index at the next index position
@@ -77,8 +76,6 @@ function rotateAroundPivot(matrix) {
             // Set the current index for the next loop
             currentIndex = nIndex
         } else {
-            // Retrieve the first next index and save it
-            const nIndex = nextIndex(currentIndex.row, currentIndex.column, height)
             const nextIndexValue = matrix[nIndex.row][nIndex.column]
             // Put the tmp value at the nextIndex place
             matrix[nIndex.row][nIndex.column] = tmp
@@ -88,8 +85,6 @@ function rotateAroundPivot(matrix) {
             currentIndex = nIndex
         }
     }
-    // Wipe out tmp
-    tmp = undefined
 }
 
 /*
@@ -97,18 +92,18 @@ function rotateAroundPivot(matrix) {
 */
 function nextIndex(row, column, matrixHeight) {
     if (row >= matrixHeight) {
-        console.error("Row index must be less than matrix height - 1");
+       throw 'Row index must be less than matrix height - 1'
     }
 
     // If we are at the bottom
-    if (row == matrixHeight - 1) {
+    if (row === matrixHeight - 1) {
         // Left item
-        if (column == 0) {
+        if (column === 0) {
             // Egde case for the 2x2 matrix scenario.
             // The first element of the last row
             // has to be moved diagonally rather than upwards since it's the element
             // beneath the pivot. 
-            if (matrixHeight == 2) {
+            if (matrixHeight === 2) {
                 return {
                     row: 0,
                     column: 1
@@ -128,17 +123,17 @@ function nextIndex(row, column, matrixHeight) {
                 column: 0
             }
         }
-    } else if (row == 0) {
+    } else if (row === 0) {
         // If we are at the top
-        if (column == 0) {
-            console.error("Invalid index. Index 0-0 is reserved for the pivot");
+        if (column === 0) {
+            throw 'Invalid index. Index 0-0 is reserved for the pivot'
         }
         // If we are at the item next to the pivot, move downwards
         return {
             row: 1,
             column: 1
         }
-    } else if (row == 1 && column == 0) {
+    } else if (row === 1 && column === 0) {
         // If we are at the item just below the pivot
         return {
             row: 0,
@@ -195,8 +190,8 @@ function createFixture(array) {
     of the array
 */
 function generateRandomFixture(array, n) {
-    if (factorial((array.length)) < n) {
-        console.error('n must be lower than the factorial(array.lenght)')
+    if (factorial(array.length) < n) {
+        throw 'n must be lower than the factorial(array.lenght)'
     }
     // Find all the permutations of the elements of the array
     // [a,b,c] => [[a, b, c], [a,c,b], [b,a,c], [b,c,a], [c,a,b], [c,b,a]]
@@ -217,5 +212,5 @@ function generateRandomFixture(array, n) {
     }
     return fixtures
 }
-
+const x = generateRandomFixture([1,2,3,4], 3)
 exports.generateRandomFixture = generateRandomFixture
