@@ -212,5 +212,5 @@ function generateRandomFixture(array, n) {
     }
     return fixtures
 }
-const x = generateRandomFixture([1,2,3,4], 3)
+
 exports.generateRandomFixture = generateRandomFixture
