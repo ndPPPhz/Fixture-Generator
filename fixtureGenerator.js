@@ -12,7 +12,7 @@ const {
 */
 function generate2NMatrix(array) {
     if (array.length % 2) {
-        console.error('Array should contain an even number of elements')
+        throw 'Array should contain an even number of elements'
     }
 
     if (array.length <= 2) {
@@ -177,7 +177,8 @@ function createFixture(array) {
     for (let day = 0; day < matchesCount; day++) {
         const matchDay = turnIntoMatchDay(matrix)
         matches.push({ 
-            ['MatchDay ' + day]: matchDay
+            name: `MatchDay ${day}`,
+            value: matchDay
         })
         rotateAroundPivot(matrix)
     }
@@ -187,9 +188,13 @@ function createFixture(array) {
 /*
     Given an array containing an even number of elements,
     the function returns N random fixtures with the elements
-    of the array
+    of the array.
+    NB: This function randomly fetches N fixtures from an
+    array containing ALL the possible permutations that can
+    be generated with the elements contained in the array.
+    The number of permutations of n distinct objects is n factorial!!!!
 */
-function generateRandomFixture(array, n) {
+function generateRandomFixtureFromAllPermutations(array, n) {
     if (factorial(array.length) < n) {
         throw 'n must be lower than the factorial(array.lenght)'
     }
@@ -213,4 +218,18 @@ function generateRandomFixture(array, n) {
     return fixtures
 }
 
+/*
+    Given an array containing an even number of elements,
+    the function returns a random fixture with the elements
+    of the array.
+*/
+function generateRandomFixture(array) {
+    let sortedArray = array.sort(() => Math.random() - 0.5)
+    // Create a fixture with that permutation as input array
+    const randomFixture = createFixture(sortedArray)
+    return randomFixture
+}
+
+console.log(generateRandomFixture([1,2,3]))
+exports.generateRandomFixtureFromAllPermutations = generateRandomFixtureFromAllPermutations
 exports.generateRandomFixture = generateRandomFixture
