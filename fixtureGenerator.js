@@ -230,6 +230,5 @@ function generateRandomFixture(array) {
     return randomFixture
 }
 
-console.log(generateRandomFixture([1,2,3]))
 exports.generateRandomFixtureFromAllPermutations = generateRandomFixtureFromAllPermutations
 exports.generateRandomFixture = generateRandomFixture
