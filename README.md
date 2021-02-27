@@ -90,7 +90,7 @@ const { generateRandomFixtureFromAllPermutations } = require('.fixtureGenerator.
     @param  {Array}     array   The array containing all the attendees
     @param  {Number}    n       The number of tournaments that needs to be randomly generated 
 */
-const tournaments = generateRandomFixture([1,2,3,4], 2)
+const tournaments = generateRandomFixtureFromAllPermutations([1,2,3,4], 2)
 
 console.log(tournaments)
 
@@ -140,6 +140,7 @@ console.log(tournaments)
         }
     ]
 */
+```
 
 ## License
 
