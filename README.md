@@ -21,8 +21,70 @@ Under the hood is driven by the [Round-robin](https://en.wikipedia.org/wiki/Roun
 ### Manual integration
 - Download the source code [from Github](https://github.com/ndPPPhz/Fixture-Generator/archive/main.zip)
 - Import it into your project
+
+### Implementation
+There are actually two ways for generating fixtures:
+1. Using `generateRandomFixture`. It will return only one random fixture
+
 ```javascript
-const { generateRandomFixture } = require('.roundrobin.js')
+const { generateRandomFixture } = require('.fixtureGenerator.js')
+
+/*
+    @param  {Array}     array   The array containing all the attendees
+*/
+const tournaments = generateRandomFixture([1,2,3,4])
+
+console.log(tournaments)
+
+/*
+    [
+        {
+          name: "MatchDay 1",
+          value: [
+            {
+              teamA: 1,
+              teamB: 3,
+            },
+            {
+              teamA: 2,
+              teamB: 4,
+            },
+          ],
+        },
+        {
+          name: "MatchDay 2",
+          value: [
+            {
+              teamA: 1,
+              teamB: 2,
+            },
+            {
+              teamA: 4,
+              teamB: 3,
+            },
+          ],
+        },
+        {
+          name: "MatchDay 3",
+          value: [
+            {
+              teamA: 1,
+              teamB: 4,
+            },
+            {
+              teamA: 3,
+              teamB: 2,
+            },
+          ],
+        }
+    ]
+*/
+
+```
+
+2. `generateRandomFixtureFromAllPermutations` takes as argument the number of fixtures you want to generate. 
+```javascript
+const { generateRandomFixtureFromAllPermutations } = require('.fixtureGenerator.js')
 
 /*
     @param  {Array}     array   The array containing all the attendees
@@ -33,50 +95,51 @@ const tournaments = generateRandomFixture([1,2,3,4], 2)
 console.log(tournaments)
 
 /*
+    // First calendar
+    [.....],
+    // Second calendar
     [
-  [
-    {
-      "MatchDay 0": [
         {
-          teamA: 1,
-          teamB: 3,
+          name: "MatchDay 1",
+          value: [
+            {
+              teamA: 1,
+              teamB: 3,
+            },
+            {
+              teamA: 2,
+              teamB: 4,
+            },
+          ],
         },
         {
-          teamA: 2,
-          teamB: 4,
-        },
-      ],
-    },
-    {
-      "MatchDay 1": [
-        {
-          teamA: 1,
-          teamB: 2,
-        },
-        {
-          teamA: 4,
-          teamB: 3,
-        },
-      ],
-    },
-    {
-      "MatchDay 2": [
-        {
-          teamA: 1,
-          teamB: 4,
+          name: "MatchDay 2",
+          value: [
+            {
+              teamA: 1,
+              teamB: 2,
+            },
+            {
+              teamA: 4,
+              teamB: 3,
+            },
+          ],
         },
         {
-          teamA: 3,
-          teamB: 2,
-        },
-      ],
-    },
-  ],
-  [ ...... ]
+          name: "MatchDay 3",
+          value: [
+            {
+              teamA: 1,
+              teamB: 4,
+            },
+            {
+              teamA: 3,
+              teamB: 2,
+            },
+          ],
+        }
+    ]
 */
-
-```
-
 
 ## License
 
