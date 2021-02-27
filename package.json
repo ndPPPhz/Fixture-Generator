@@ -1,6 +1,6 @@
 {
   "name": "fixture-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Random Matches Fixture Generator. Useful for creating a list of random matches for sport events.",
   "main": "roundrobin.js",
   "scripts": {
