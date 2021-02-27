@@ -177,7 +177,7 @@ function createFixture(array) {
     for (let day = 0; day < matchesCount; day++) {
         const matchDay = turnIntoMatchDay(matrix)
         matches.push({ 
-            name: `MatchDay ${day}`,
+            name: `MatchDay ${day+1}`,
             value: matchDay
         })
         rotateAroundPivot(matrix)
