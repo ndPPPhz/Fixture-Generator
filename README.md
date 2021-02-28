@@ -8,6 +8,8 @@ Fixture-Generator is a fancy, quick and random generator of matches you can impo
 
 Under the hood is driven by the [Round-robin](https://en.wikipedia.org/wiki/Round-robin_tournament) alghorithm which guarantees thah each contestant meets all other contestants in turn.
 
+I have used this tool during the development of [What If](https://github.com/ndPPPhz/WhatIf_UI). Take a look at it if you are a fantasy football player.
+
 ## Usage
 
 ### NPM
